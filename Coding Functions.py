@@ -1,5 +1,5 @@
 # Problem 1 - Giving you the longest word in a set of text. 
-define longestWord( text ):
+def longestWord( text ):
 	word = ''
 	longest_word = ''
 	max_length = 0
@@ -7,11 +7,16 @@ define longestWord( text ):
 	for char in text: 
 		if char.isalnum():
     			word += char
-		elif word != ''
+		elif word != '':
 			if len(word) > max_length:
 				max_length = len(word)
 				longest_word = word
 			word = ''
+
+	#Handle last word (If string doesn't end in punctuation)
+	if word != '':
+		if len(word) > max_length:
+			longest_word = word
 
 	return longest_word
 
