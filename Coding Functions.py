@@ -167,3 +167,54 @@ def check_password( password ):
 		results = "Very Strong"
 
 	return results
+
+
+
+#Problem 9 - Emojify sentences by replacing words with their respective emojis according to a predefined dictionary
+
+def emojify ( sentence ):
+	emoji_sentence = ""
+	current_word = ""
+	emoji_dict = {
+		"pizza": "🍕",
+    		"love": "❤️",
+    		"coding": "👨‍💻",
+    		"cat": "🐱",
+    		"cats": "🐱",
+    		"dog": "🐶",
+    		"dogs": "🐶",
+    		"happy": "😊",
+    		"sad": "😢"
+		}
+
+	for i in range(len(sentence)):
+		if sentence[i].isalpha():
+			#If the character is a letter - Form the word first. Don't process.
+			current_word += sentence[i]
+			
+			if i == len(sentence)-1:
+				#If the sentence ends on a letter, ensure the word is processed.
+				if current_word.lower() in emoji_dict:
+					current_word = emoji_dict[current_word.lower()]
+					emoji_sentence += current_word
+					current_word = ""
+				else:
+				#If the last character is a letter on its own, ensure it still gets added to the sentence
+					emoji_sentence += current_word
+		else:
+			#The character isn't a letter - Special Character or space.
+			#If the current word is filled - Check the word against the emoji dictionary + Add current special character
+			#If the current word is blank - Add current special character
+			
+			if current_word != "":
+				if current_word.lower() in emoji_dict:
+					current_word = emoji_dict[current_word.lower()]
+					emoji_sentence += current_word + sentence[i]
+					current_word = ""
+				else:
+					emoji_sentence += current_word
+			else:
+				emoji_sentence += sentence[i]
+
+			
+	return emoji_sentence 
